@@ -11,10 +11,10 @@ word_count.times do |i| # Loops for each word
     word = IO.readlines("#{words_file}")[i] # Picks word from file given the line number
     puts word # Prints that word into terminal.
 
-    page = URI.open("https://www.dictionary.com/browse/#{word.strip}") # Inserts that word into website URL
+    page = URI.open("https://www.merriam-webster.com/dictionary/#{word.strip}") # Inserts that word into website URL
     parse_page = Nokogiri::HTML(page) # Parses page
 
-    definition = parse_page.css(".e1q3nk1v4").text # Collects the definition on website
+    definition = parse_page.css(".dtText").text # Collects the definition on website
 
     File.write("log.txt", "#{word.strip}: #{definition} \n", mode: "a") # Writes word and definition in log.txt
 end
